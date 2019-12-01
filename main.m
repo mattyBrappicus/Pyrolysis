@@ -1,31 +1,39 @@
 clear
 %clc
-%Species indices key:
+%Species key:
     % 1 = c2h4
     % 2 = hcl
-    % 3 = o2
+    % 3 = vinylCl
     % 4 = 1,1,2-trichloroethane
-    % 5 = co2
+    % 5 = h2
     % 6 = cl2
     % 7 = 1,2-dichloroethane
-    % 8 = h2o
-    
-%Heats of Reaction and Cp values at 533K
-H_R1 = -240.14; % units of kJ/mol
-H_R2 = -149.31;
-H_R3 = -1321.08;
-H_R4 = -116.82;
-H_tot = [-240.14, -149.31, -1321.08, -116.82]; 
+    % 8 = c4h6
+    % 9 = c2h2
+    % 10 = c2h2cl2
 
-Cp_1 = 0.0538; % units of kJ/mol*K
-Cp_2 = 0.0292;
-Cp_3 = 0.0304;
-Cp_4 = 0.1050;
-Cp_5 = 0.0418;
-Cp_6 = 0.0351;
-Cp_7 = 0.0937;
-Cp_8 = 0.0345;
-Cp_tot = [Cp_1 Cp_2 Cp_3 Cp_4 Cp_5 Cp_6 Cp_7 Cp_8];
+%total heats of reaction, calclated in PyrolysisHRxn spreadsheet
+%H_tot = H_rxn,std + deltaCp, T=773K
+H_tot1 = 92.90; % units of kJ/mol
+H_tot2 = 77.63;
+H_tot3 = 186.0;
+H_tot4 = 167.2;
+H_tot5 = -173.5;
+H_tot5 = 62.32;
+H_tot = [H_tot1, H_tot2, H_tot3, H_tot4, H_tot5, H_tot6]; 
+
+%Average heat capacities (Cpbar), Temp range=298K-773K
+Cp_1 = 0.0640; % units of kJ/mol/K
+Cp_2 = 0.0295;
+Cp_3 = 0.0215;
+Cp_4 = 0.1175;
+Cp_5 = 0.0293;
+Cp_6 = 0.0359;
+Cp_7 = 0.1063;
+Cp_8 = 0.1231;
+Cp_9 = 0.0547;
+Cp_10 = 0.0651;
+Cp_tot = [Cp_1 Cp_2 Cp_3 Cp_4 Cp_5 Cp_6 Cp_7 Cp_8 Cp_9 Cp_10];
 sumCp = sum(Cp_tot);
  
 
