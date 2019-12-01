@@ -38,17 +38,17 @@ sumCp = sum(Cp_tot);
  
 
 %Main Properties, note that some of these values were taken from Aspen HYSYS
-T0 = 470; % units of K
-P0 = 1500; % units of kPa
-D = 0.0245; % units of m; diameter of tube
-L = 5.5;  % units of m
-N = 1100; % number of tubes
-Ac = (pi*((D^2)/4)); % units of m^2
-phi = 0.4; % represents the void fraction
-Dp = D/8; % units of m; diameter of particle
-mu = 2.11*10^-5; % units of kg/m*s
-rho0 = 8.239; % units of kg/m^3
-V_r = (pi*((D^2)/4))*L; % units of m^3
+T0 = 470; %                 units of K
+P0 = 1500; %                units of kPa
+D = 0.0245; %               units of m; diameter of tube
+L = 5.5;  %                 units of m
+N = 1100; %                 number of tubes
+Ac = (pi*((D^2)/4)); %      units of m^2
+phi = 0.4; %                represents the void fraction
+Dp = D/8; %                 units of m; diameter of particle
+mu = 2.11*10^-5; %          units of kg/m*s
+rho0 = 8.239; %             units of kg/m^3
+V_r = (pi*((D^2)/4))*L; %   units of m^3
 
 %Coolant Properties
 U = 0.3; % units of kJ/(m^2*K*s)
@@ -58,15 +58,17 @@ flowC = 3010/3600; % units of kg/s
 
 %Initial molar flowrates from starting material balance
  % units of mol/s
-F1_0 = 10/3600; % 1 = c2h4
-F2_0 = 100/3600; % 2 = hcl
-F3_0 = 10/3600; % 3 = o2
-F4_0 = 0/3600; % 4 = 1,1,2-trichloroethane
-F5_0 = 0/3600; % 5 = co2
-F6_0 = 0.1/3600; % 6 = cl2
-F7_0 = 0/3600; % 7 = 1,2-dichloroethane
-F8_0 = 1/3600; % 8 = h2o
-F = [F1_0 F2_0 F3_0 F4_0 F5_0 F6_0 F7_0 F8_0];     
+F1_0 = 10/3600; %     1 = c2h4
+F2_0 = 100/3600; %    2 = hcl
+F3_0 = 10/3600; %     3 = vinylCl
+F4_0 = 0/3600; %      4 = 1,1,2-trichloroethane
+F5_0 = 0/3600; %      5 = h2
+F6_0 = 0.1/3600; %    6 = cl2
+F7_0 = 0/3600; %      7 = 1,2-dichloroethane
+F8_0 = 1/3600; %      8 = c4h6
+F9_0 = 0/3600; %      9 = c2h2
+F10_0 = 0/3600; %     10 = c2h2cl2
+F = [F1_0 F2_0 F3_0 F4_0 F5_0 F6_0 F7_0 F8_0 F9_0 F10_0];     
 Ftotal_0 = sum(F);
 
 %Ergun Equation Parameters
