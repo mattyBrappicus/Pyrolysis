@@ -19,7 +19,7 @@ H_tot2 = 77.63;
 H_tot3 = 186.0;
 H_tot4 = 167.2;
 H_tot5 = -173.5;
-H_tot5 = 62.32;
+H_tot6 = 62.32;
 H_tot = [H_tot1, H_tot2, H_tot3, H_tot4, H_tot5, H_tot6]; 
 
 %Average heat capacities (Cpbar), Temp range=298K-773K
