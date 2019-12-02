@@ -1,15 +1,27 @@
 function null = plotdata(v, y, conv)
+%Species key:
+    % 1 = c2h4
+    % 2 = hcl
+    % 3 = vinylCl
+    % 4 = 1,1,2-trichloroethane
+    % 5 = h2
+    % 6 = cl2
+    % 7 = 1,2-dichloroethane
+    % 8 = c4h6
+    % 9 = c2h2
+    % 10 = c2h2cl2
+
 % Figure 1 -- Flowrate vs Reactor Vol
 figure(1)
 %y-axis left
-plot(v,y(:,1),'b-',v,y(:,8),'y-',v,y(:,3),'m-',v,y(:,4),'c-',v,y(:,5),'r-',v,y(:,6),'g-',v,y(:,7),'k-')
+plot(v,y(:,1),'b-',v,y(:,8),'y-',v,y(:,3),'m-',v,y(:,4),'c-',v,y(:,5),'r-',v,y(:,6),'g-',v,y(:,7),'k-','k-',v,y(:,9),'k-',v,y(:,10),'k-')
 ylabel('Molar Flowrate - mol/hr')
 %y-axis right
 grid
 xlabel('Reactor Volume - m^3')
 ylabel('Molar Flowrate - mol/hr')
 title('Flowrate vs. Reactor Volume')
-legend('C_2H_4','H_2O','O_2','C_2H_3Cl_3','CO_2','Cl_2','C_2H_4Cl_2','Location','northeastoutside')
+legend('C_2H_4','C_4H_6','VinylCl','C_2H_3Cl_3','H_2','Cl_2','C_2H_4Cl_2','C_2H_2','C_2_H_2Cl_2''Location','northeastoutside')
 
 %Figure 2 -- HCl Flowrate vs Reactor Vol
 figure(2)
@@ -22,7 +34,7 @@ title('HCl Flowrate vs. Reactor Volume')
 
 % Figure 3 -- Reactor T vs Reactor Vol
 figure(3)
-plot(v,y(:,9),'k-')
+plot(v,y(:,11),'k-')
 grid
 xlabel('Reactor Volume - m^3')
 ylabel('Reactor Temperature - K')
@@ -30,7 +42,7 @@ title('Reactor Temperature vs. Reactor Volume')
 
 % Figure 4 -- Coolant T vs Reactor Vol
 figure(4)
-plot(v,y(:,11),'k-')
+plot(v,y(:,13),'k-')
 grid
 xlabel('Reactor Volume - m^3')
 ylabel('Coolant Temperature - K')
@@ -38,7 +50,7 @@ title('Coolant Temperature vs. Reactor Volume')
 
 % Figure 5 -- Reactor P vs Reactor Vol
 figure(5)
-plot(v,y(:,10),'k-')
+plot(v,y(:,12),'k-')
 grid
 xlabel('Reactor Volume - m^3')
 ylabel('Reactor Pressure - kPa')
