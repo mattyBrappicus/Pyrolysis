@@ -24,7 +24,7 @@ grid
 xlabel('Reactor Volume - m^3')
 ylabel('Molar Flowrate - mol/hr')
 title('Flowrate vs. Reactor Volume')
-legend('C_2H_4','C_4H_6','VinylCl','C_2H_3Cl_3','H_2','Cl_2','C_2H_4Cl_2','C_2H_2','C_2_H_2Cl_2''Location','northeastoutside')
+legend('C_2H_4','HCl','VinylCl','C_2H_3Cl_3','H_2','Cl_2','C_2H_4Cl_2','C_4H_6','C_2H_2','C_2_H_2Cl_2','Location','northeastoutside')
 
 %Figure 2 -- HCl Flowrate vs Reactor Vol
 figure(2)
