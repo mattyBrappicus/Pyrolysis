@@ -1,5 +1,5 @@
 function null = plotdata(v, y, conv)
-%Species key:
+%Y variables key:
     % 1 = c2h4
     % 2 = hcl
     % 3 = vinylCl
@@ -10,6 +10,9 @@ function null = plotdata(v, y, conv)
     % 8 = c4h6
     % 9 = c2h2
     % 10 = c2h2cl2
+    % 11 = T (reactor temp)
+    % 12 = P (reactor pres)
+    % 13 = Tc (coolant temp)
 
 % Figure 1 -- Flowrate vs Reactor Vol
 figure(1)
@@ -58,10 +61,10 @@ title('Reactor Pressure vs. Reactor Volume')
 
 %Conversion profile
 figure(6)
-plot(v ,conv,'k-')
+plot(v ,conv,'k-')                      %conv(7) is the seventh element of the conv vector, no? #7 is dichloro, which is the species we want to specify conversion in terms of.
 grid
 xlabel('Reactor Volume - m^3')
-ylabel('Conversion (% of C_2H_4)')
+ylabel('Conversion (% of C_2H_4Cl_2)')  %This was previously conv of ethylene. Not sure how to change graph values to specify conv of dichloro.
 title('Conversion profile')
 
 end
