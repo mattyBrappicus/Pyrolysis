@@ -38,16 +38,16 @@ sumCp = sum(Cp_tot);
  
 
 %Main Properties, note that some of these values were taken from Aspen HYSYS
-T0 = 470; %                 units of K
-P0 = 1500; %                units of kPa
+T0 = 430; %                 units of K
+P0 = 2000; %                units of kPa
 D = 0.0245; %               units of m; diameter of tube
 L = 5.5;  %                 units of m
 N = 1100; %                 number of tubes
 Ac = (pi*((D^2)/4)); %      units of m^2
 phi = 0.4; %                represents the void fraction
 Dp = D/8; %                 units of m; diameter of particle
-mu = 2.11*10^-5; %          units of kg/m*s
-rho0 = 8.239; %             units of kg/m^3
+mu = 2.033*10^-4; %         units of kg/m/s
+rho0 = 1028; %              units of kg/m^3
 V_r = (pi*((D^2)/4))*L; %   units of m^3
 
 %Coolant Properties
@@ -58,21 +58,21 @@ flowC = 3010/3600; % units of kg/s
 
 %Initial molar flowrates from starting material balance
  % units of mol/s
-F1_0 = 10/3600; %     1 = c2h4
-F2_0 = 100/3600; %    2 = hcl
-F3_0 = 10/3600; %     3 = vinylCl
-F4_0 = 0/3600; %      4 = 1,1,2-trichloroethane
-F5_0 = 0/3600; %      5 = h2
-F6_0 = 0.1/3600; %    6 = cl2
-F7_0 = 0/3600; %      7 = 1,2-dichloroethane
-F8_0 = 1/3600; %      8 = c4h6
-F9_0 = 0/3600; %      9 = c2h2
-F10_0 = 0/3600; %     10 = c2h2cl2
+F1_0 = 0.3732/3600; %   1 = c2h4
+F2_0 = 2.2637/3600; %   2 = hcl
+F3_0 = 0.0001/3600; %   3 = vinylCl
+F4_0 = 3.7100/3600; %   4 = 1,1,2-trichloroethane
+F5_0 = 0/3600; %        5 = h2
+F6_0 = 124.5069/3600; % 6 = cl2
+F7_0 = 1801.084/3600; % 7 = 1,2-dichloroethane
+F8_0 = 0/3600; %        8 = c4h6
+F9_0 = 0/3600; %        9 = c2h2
+F10_0 = 0/3600; %       10 = c2h2cl2
 F = [F1_0 F2_0 F3_0 F4_0 F5_0 F6_0 F7_0 F8_0 F9_0 F10_0];     
 Ftotal_0 = sum(F);
 
 %Ergun Equation Parameters
-MW = [0.02805, 0.03646, 0.01600, 0.1334, 0.04401, 0.0709, 0.09896, 0.01802]; %kg/mol
+MW = [0.02805, 0.03646, 0.06250, 0.1334, 0.00202, 0.0709, 0.09896, 0.05409, 0.026038, 0.09694]; %kg/mol
 G = sum(MW.*F)/Ac; % units of kg/(m^2 * s)
 Beta = (((G/(Dp)) * ((1-phi)/(phi^3))) * (((150*(1-phi)*mu)/Dp) + (1.75*G)))/1000; % units of kPa*kg/(m^4)
 
