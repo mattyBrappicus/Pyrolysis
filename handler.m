@@ -131,7 +131,7 @@ else
     frick = 1/(12.96*(log10(6.9/Re))^2);
 end
 Beta = -32*frick*rho*Q^2/Ac/pi^2/D^5; % units of kPa/m^3
-outvar(12) = -Beta * (1/(Ac*rho)); % units of kPa/m^3
+outvar(12) = Beta * (1/(Ac*rho)); % units of kPa/m^3
 
 % Shell side differential equations
 outvar(13) = -(4 * U * (T - Tc)) / (flowC * Cpc * Do); % units of K/m^3
