@@ -55,7 +55,6 @@ U = 0.3; % units of kJ/(m^2*K*s)
 Tc0 =410; % units of K, boiling point is 530 K
 flowC = 3010/3600; % units of kg/s
 
-
 %Initial molar flowrates from starting material balance
  % units of mol/s
 F1_0 = 0.3732/3600; %   1 = c2h4
@@ -71,22 +70,23 @@ F10_0 = 0/3600; %       10 = c2h2cl2
 F = [F1_0 F2_0 F3_0 F4_0 F5_0 F6_0 F7_0 F8_0 F9_0 F10_0];     
 Ftotal_0 = sum(F);
 
-%Ergun Equation Parameters
+%Pressure drop initial parameters
 MW = [0.02805, 0.03646, 0.06250, 0.1334, 0.00202, 0.0709, 0.09896, 0.05409, 0.026038, 0.09694]; %kg/mol
-Q = sum(MW.*F)/rho; % units of kg/(m^2 * s)
-Re = 4*rho*Q/pi/D/mu;
-if Re < 10000
-    frick = 16/Re;
+Q0 = sum(MW.*F)/rho0; % units of m^3/s
+Re0 = 4*rho0*Q0/pi/D/mu;
+if Re0 < 10000
+    frick0 = 16/Re0;
 else
-    frick = 1/(12.96*(log10(6.9/Re))^2);
-Delta = -32*frick*rho*Q^2/Ac/pi^2/D^5; % units of kPa/m^3
+    frick0 = 1/(12.96*(log10(6.9/Re0))^2);
+end
+Delta0 = -32*frick0*rho0*Q^2/Ac/pi^2/D^5; % units of kPa/m^3
 
 %Logic
 numElements = 1000; % number of solver iterations
 dv = V_r/numElements;
 vspan = linspace(0, V_r, numElements);
 y0 = [F1_0 F2_0 F3_0 F4_0 F5_0 F6_0 F7_0 F8_0 F9_0 F10_0 T0 P0 Tc0]; % load dependent variables
-handleranon = @(v,y) handler(v,y,phi,H_tot,Cp_tot,L,D,Beta,Ac,U,flowC,Ftotal_0,T0,P0,rho0); % use handler fxn
+handleranon = @(v,y) handler(v,y,H_tot,Cp_tot,L,D,Ac,U,flowC,Ftotal_0,T0,P0,rho0,MW,Q0,Re0,frick0,Delta0); % use handler fxn
 [ v, ysoln ] = ode15s(handleranon,vspan,y0);
 conv = zeros(numElements,1);
 for i = 1:numElements

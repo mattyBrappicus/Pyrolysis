@@ -1,4 +1,4 @@
-function outvar = handler(v,y,H_tot,Cp_tot,L,D,Delta,Ac,U,flowC,Ftotal_0,T0,P0,rho0)
+function outvar = handler(v,y,H_tot,Cp_tot,L,D,Ac,U,flowC,Ftotal_0,T0,P0,rho0,MW,Q0,Re0,frick0,Delta0)
 %Species indices key:
     % 1 = c2h4
     % 2 = hcl
@@ -27,7 +27,6 @@ P = y(12); % units of kPa
 
 Tc = y(13); % units of K
 Ftotal = (F1 + F2 + F3 + F4 + F5 + F6 + F7 + F8 + F9 + F10);
-As = D * pi * L; % units of m^2
 Do = D + 2*.0036; % units of m
 Cpc = ((Tc - 273) * .0029 + 1.5041 + 273)/1000; % units of kJ/(kg*K)
 
@@ -119,10 +118,18 @@ end
 
 outvar(11) = (-term1 - term2) / term3; % units of K/m^3
 
-% Ergun differetial equation
+% Pressure drop variables and differetial equation
 rho = rho0 * (P/P0) * (Ftotal_0/Ftotal) * (T0/T); % units of kg/m^3
+MW = [0.02805, 0.03646, 0.06250, 0.1334, 0.00202, 0.0709, 0.09896, 0.05409, 0.026038, 0.09694]; %kg/mol
+Q = sum(MW.*F)/rho; % units of m^3/s
+Re = 4*rho*Q0/pi/D/mu;
+if Re < 10000
+    frick = 16/Re;
+else
+    frick = 1/(12.96*(log10(6.9/Re))^2);
+end
+Delta = -32*frick0*rho0*Q^2/Ac/pi^2/D^5; % units of kPa/m^3
 outvar(12) = -Delta * (1/(Ac*rho)); % units of kPa/m^3
-
 
 % Shell side differential equations
 outvar(13) = -(4 * U * (T - Tc)) / (flowC * Cpc * Do); % units of K/m^3
