@@ -1,4 +1,4 @@
-function outvar = handler(v,y,H_tot,Cp_tot,L,D,Ac,U,flowC,Ftotal_0,T0,P0,rho0,MW,Q0,Re0,frick0,Beta0)
+function outvar = handler(v,y,H_tot,Cp_tot,L,D,Ac,U,flowC,Ftotal_0,T0,P0,rho0,MW,mu)
 %Species indices key:
     % 1 = c2h4
     % 2 = hcl
@@ -97,11 +97,11 @@ outvar(10) = r6;
 
 % Tube side differential equation
 term1 = r1 * H_tot(1);
-term1 = term1 + r2 * H_tot(2);
-term1 = term1 + r3 * H_tot(3);
-term1 = term1 + r4 * H_tot(4);
-term1 = term1 + r5 * H_tot(5);
-term1 = term1 + r6 * H_tot(6);
+term1 = term1 + r2*H_tot(2);
+term1 = term1 + r3*H_tot(3);
+term1 = term1 + r4*H_tot(4);
+term1 = term1 + r5*H_tot(5);
+term1 = term1 + r6*H_tot(6);
 
 term2 = U * 4 / D * (T - Tc); % units of kJ/(m^3*s)
 
@@ -120,14 +120,17 @@ outvar(11) = (-term1 - term2) / term3; % units of K/m^3
 
 % Pressure drop variables and differetial equation
 rho = rho0 * (P/P0) * (Ftotal_0/Ftotal) * (T0/T); % units of kg/m^3, assume ideal gases
-Q = sum(MW.*F)/rho; % units of m^3/s
-Re = 4*rho*Q0/pi/D/mu;
+Q = 0;
+for i = 1:length(molFracs)
+    Q = Q + (MW(i)*y(i))/rho; % units of m^3/s
+end
+Re = 4*rho*Q/pi/D/mu;
 if Re < 10000
     frick = 16/Re;
 else
     frick = 1/(12.96*(log10(6.9/Re))^2);
 end
-Beta = -32*frick*rho0*Q^2/Ac/pi^2/D^5; % units of kPa/m^3
+Beta = -32*frick*rho*Q^2/Ac/pi^2/D^5; % units of kPa/m^3
 outvar(12) = -Beta * (1/(Ac*rho)); % units of kPa/m^3
 
 % Shell side differential equations
