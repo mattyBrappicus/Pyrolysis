@@ -73,8 +73,13 @@ Ftotal_0 = sum(F);
 
 %Ergun Equation Parameters
 MW = [0.02805, 0.03646, 0.06250, 0.1334, 0.00202, 0.0709, 0.09896, 0.05409, 0.026038, 0.09694]; %kg/mol
-G = sum(MW.*F)/Ac; % units of kg/(m^2 * s)
-Beta = (((G/(Dp)) * ((1-phi)/(phi^3))) * (((150*(1-phi)*mu)/Dp) + (1.75*G)))/1000; % units of kPa*kg/(m^4)
+Q = sum(MW.*F)/rho; % units of kg/(m^2 * s)
+Re = 4*rho*Q/pi/D/mu;
+if Re < 10000
+    frick = 16/Re;
+else
+    frick = 1/(12.96*(log10(6.9/Re))^2);
+Delta = -32*frick*rho*Q^2/Ac/pi^2/D^5; % units of kPa/m^3
 
 %Logic
 numElements = 1000; % number of solver iterations
