@@ -24,7 +24,7 @@ H_tot = [H_tot1, H_tot2, H_tot3, H_tot4, H_tot5, H_tot6];
 
 %Average heat capacities (Cpbar), Temp range=298K-773K
 Cp_1 = 0.0640; % units of kJ/mol/K
-Cp_2 = 0.0295;
+Cp_2 = 0.0295; 
 Cp_3 = 0.0215;
 Cp_4 = 0.1175;
 Cp_5 = 0.0293;
@@ -39,21 +39,19 @@ sumCp = sum(Cp_tot);
 
 %Main Properties, note that some of these values were taken from Aspen HYSYS
 T0 = 491; %                 units of K, =dew point of stream S8 in HYSYS
-P0 = 2000; %                units of kPa
-D = 0.0245; %               units of m; diameter of tube
-L = 5.5;  %                 units of m
+P0 = 3000; %                units of kPa
+D = 0.05; %               units of m; diameter of tube
+L = 9;  %                 units of m
 N = 1100; %                 number of tubes
 Ac = (pi*((D^2)/4)); %      units of m^2
-%phi = 0.4; %                represents the void fraction
-%Dp = D/8; %                 units of m; diameter of particle
 mu = 1.591*10^-5; %         units of kg/m/s
 rho0 = 63; %              units of kg/m^3
 V_r = (pi*((D^2)/4))*L; %   units of m^3
 
 %Coolant Properties
 U = 0.3; % units of kJ/(m^2*K*s)
-Tc0 =410; % units of K, boiling point is 530 K
-flowC = 3010/3600; % units of kg/s
+Tc0 =560; % units of K, boiling point is 530 K
+flowC = 10010/3600; % units of kg/s
 
 %Initial molar flowrates from starting material balance
  % units of mol/s
@@ -82,7 +80,7 @@ end
 Beta0 = -32*frick0*rho0*Q0^2/Ac/pi^2/D^5; % units of kPa/m^3
 
 %Logic
-numElements = 1000; % number of solver iterations
+numElements = 2000; % number of solver iterations
 dv = V_r/numElements;
 vspan = linspace(0, V_r, numElements);
 y0 = [F1_0 F2_0 F3_0 F4_0 F5_0 F6_0 F7_0 F8_0 F9_0 F10_0 T0 P0 Tc0]; % load dependent variables
@@ -90,9 +88,10 @@ handleranon = @(v,y) handler(v,y,H_tot,Cp_tot,L,D,Ac,U,flowC,Ftotal_0,T0,P0,rho0
 [ v, ysoln ] = ode15s(handleranon,vspan,y0);
 conv = zeros(numElements,1);
 for i = 1:numElements
-    conv(i) = (1-ysoln(i,1)/ysoln(1,1));
+    conv(i) = (1-ysoln(i,7)/ysoln(1,7));
 end
 disp(conv(numElements))
+finalvcl = ysoln(numElements,3)/(3006*.3476)*3600
 
 %disp('Final Conversion: '+ num2str(conv(numElements)))
 plotdata(v, ysoln, conv);
