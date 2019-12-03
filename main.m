@@ -38,7 +38,7 @@ sumCp = sum(Cp_tot);
  
 
 %Main Properties, note that some of these values were taken from Aspen HYSYS
-T0 = 430; %                 units of K
+T0 = 491; %                 units of K, =dew point of stream S8 in HYSYS
 P0 = 2000; %                units of kPa
 D = 0.0245; %               units of m; diameter of tube
 L = 5.5;  %                 units of m
@@ -46,8 +46,8 @@ N = 1100; %                 number of tubes
 Ac = (pi*((D^2)/4)); %      units of m^2
 %phi = 0.4; %                represents the void fraction
 %Dp = D/8; %                 units of m; diameter of particle
-mu = 2.033*10^-4; %         units of kg/m/s
-rho0 = 1028; %              units of kg/m^3
+mu = 1.591*10^-5; %         units of kg/m/s
+rho0 = 63; %              units of kg/m^3
 V_r = (pi*((D^2)/4))*L; %   units of m^3
 
 %Coolant Properties
@@ -79,14 +79,14 @@ if Re0 < 10000
 else
     frick0 = 1/(12.96*(log10(6.9/Re0))^2);
 end
-Delta0 = -32*frick0*rho0*Q^2/Ac/pi^2/D^5; % units of kPa/m^3
+Beta0 = -32*frick0*rho0*Q0^2/Ac/pi^2/D^5; % units of kPa/m^3
 
 %Logic
 numElements = 1000; % number of solver iterations
 dv = V_r/numElements;
 vspan = linspace(0, V_r, numElements);
 y0 = [F1_0 F2_0 F3_0 F4_0 F5_0 F6_0 F7_0 F8_0 F9_0 F10_0 T0 P0 Tc0]; % load dependent variables
-handleranon = @(v,y) handler(v,y,H_tot,Cp_tot,L,D,Ac,U,flowC,Ftotal_0,T0,P0,rho0,MW,Q0,Re0,frick0,Delta0); % use handler fxn
+handleranon = @(v,y) handler(v,y,H_tot,Cp_tot,L,D,Ac,U,flowC,Ftotal_0,T0,P0,rho0,MW,Q0,Re0,frick0,Beta0); % use handler fxn
 [ v, ysoln ] = ode15s(handleranon,vspan,y0);
 conv = zeros(numElements,1);
 for i = 1:numElements
