@@ -17,10 +17,7 @@ function null = plotdata(v, y, conv)
 % Figure 1 -- Flowrate vs Reactor Vol
 figure(1)
 %y-axis left
-loyolagreen = 1/255*[0,104,87];
-h = plot(v,y(:,1),v,y(:,2),v,y(:,3),v,y(:,4),v,y(:,5),v,y(:,6),v,y(:,7),v,y(:,9),v,y(:,9),v,y(:,10));
-set(h, {'color'}, {	[0, 0.4470, 0.7410]; [0.8500, 0.3250, 0.0980];[1, 0, 0];[0.4660, 0.6740, 0.1880];[0.9290, 0.6940, 0.1250];...
-    [0, 0.5, 0];'k';[0.3010, 0.7450, 0.9330];[0.6350, 0.0780, 0.1840];'b'});
+h = plot(v,y(:,1),'+',v,y(:,2),'o',v,y(:,3),'*',v,y(:,4),'.',v,y(:,5),'x',v,y(:,6),'s',v,y(:,7),'d',v,y(:,8),'^',v,y(:,9),'p',v,y(:,10),'h');
 ylabel('Molar Flowrate - mol/hr')
 %y-axis right
 grid
@@ -29,6 +26,7 @@ ylabel('Molar Flowrate - mol/hr')
 title('Flowrate vs. Reactor Volume')
 legend('C_2H_4','HCl','C_2H_3Cl','C_2H_3Cl_3','H_2','Cl_2','C_2H_4Cl_2','C_4H_6','C_2H_2','C_2H_2Cl_2','Location','northeastoutside')
 xlim([0 0.018])
+
 % Figure 3 -- Reactor T vs Reactor Vol
 figure(3)
 plot(v,y(:,11),'k-')
