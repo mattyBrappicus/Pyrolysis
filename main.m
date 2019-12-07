@@ -80,7 +80,7 @@ end
 Beta0 = -32*frick0*rho0*Q0^2/Ac/pi^2/D^5; % units of kPa/m^3
 
 %Logic
-numElements = 2000; % number of solver iterations
+numElements = 50; % number of solver iterations
 dv = V_r/numElements;
 vspan = linspace(0, V_r, numElements);
 y0 = [F1_0 F2_0 F3_0 F4_0 F5_0 F6_0 F7_0 F8_0 F9_0 F10_0 T0 P0 Tc0]; % load dependent variables
@@ -91,7 +91,7 @@ for i = 1:numElements
     conv(i) = (1-ysoln(i,7)/ysoln(1,7));
 end
 disp(conv(numElements))
-finalvcl = ysoln(numElements,3)/(3006*.3476)*3600
+finalvcl = ysoln(numElements,3)/(3006*.3476)*3600;
 
 %disp('Final Conversion: '+ num2str(conv(numElements)))
 plotdata(v, ysoln, conv);

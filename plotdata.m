@@ -53,10 +53,10 @@ title('Reactor Pressure vs. Reactor Volume')
 
 %Conversion profile
 figure(6)
-plot(v ,conv,'k-')                      %conv(7) is the seventh element of the conv vector, no? #7 is dichloro, which is the species we want to specify conversion in terms of.
+plot(v ,conv,'k-')
 grid
 xlabel('Reactor Volume - m^3')
-ylabel('Conversion (% of C_2H_4Cl_2)')  %This was previously conv of ethylene. Not sure how to change graph values to specify conv of dichloro.
+ylabel('Conversion (% of C_2H_4Cl_2)') 
 title('Conversion profile')
 
 end
