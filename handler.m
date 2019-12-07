@@ -84,7 +84,7 @@ r5 = k(5) * pp(9) * pp(1) / R_kinetics / T;
 r6 = k(6) * pp(4) / R_kinetics / T;
 
 % Set up differential equations
-outvar(1) = r3 - 1*r5;
+outvar(1) = r3 - 1*r4 - 1*r5;
 outvar(2) = r1 + r2 + r6;
 outvar(3) = r1 - 1*r2;
 outvar(4) = -1*r6;
@@ -92,7 +92,7 @@ outvar(5) = r4;
 outvar(6) = r3;
 outvar(7) = -1*r1 - 1*r3;
 outvar(8) = r5;
-outvar(9) = r4 - 1*r5;
+outvar(9) = r2 + r4 - 1*r5;
 outvar(10) = r6;
 
 % Tube side differential equation
